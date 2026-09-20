@@ -56,3 +56,44 @@ but backward propagation exceeds available VRAM.
 ### Next step
 
 Test additional memory-saving strategies on single GPU.
+
+## EXP-002 — Activation Offload Smoke Test
+
+### Date
+2026-09-20
+
+### Changes from EXP-001
+- enable_gradient_checkpointing: true
+- enable_fp32: false
+- use_compile: false
+- enable_activation_offload: true
+- PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+
+### Result
+
+The model and all 50 RoboTwin datasets loaded successfully.
+
+Training entered Step 0/5, but CUDA OOM still occurred during:
+
+~~~~python
+loss.backward()
+~~~~
+
+### Memory state
+
+~~~~text
+GPU total: 47.36 GiB
+Process memory in use: 46.48 GiB
+Free memory: 57.31 MiB
+Failed allocation: 12.00 MiB
+~~~~
+
+### Conclusion
+
+Activation offload reduced the size of the failed allocation compared with
+EXP-001, but single-GPU VRAM is still insufficient to complete backward
+propagation.
+
+### Next step
+
+Test a stronger memory-saving strategy, prioritizing FSDP/parameter offload.
