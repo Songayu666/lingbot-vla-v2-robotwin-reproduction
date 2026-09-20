@@ -97,3 +97,26 @@ propagation.
 ### Next step
 
 Test a stronger memory-saving strategy, prioritizing FSDP/parameter offload.
+
+## EXP-003 — FSDP Offload Attempt
+
+### Date
+2026-09-20
+
+### Change
+- enable_fsdp_offload: true
+
+### Result
+
+Training did not start.
+
+The run failed during model parallelization with:
+
+~~~~text
+ValueError: Only FSDP training supports `enable_fsdp_offload`.
+~~~~
+
+### Conclusion
+
+The current parallel configuration is not compatible with FSDP offload.
+The required FSDP mode must be confirmed from the source code before retrying.
