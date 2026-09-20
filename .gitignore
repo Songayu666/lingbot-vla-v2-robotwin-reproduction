@@ -1,0 +1,32 @@
+
+# ===== Local models / datasets / caches =====
+models/
+cache/
+datasets/
+
+# ===== Training outputs =====
+output/
+outputs/
+checkpoints/
+
+# ===== Runtime logs =====
+*.log
+log.txt
+
+# ===== Weights =====
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+
+# ===== W&B =====
+wandb/
+
+# ===== Python =====
+__pycache__/
+*.pyc
+*.pyo
+
+# ===== Local backups =====
+*.bak
+
