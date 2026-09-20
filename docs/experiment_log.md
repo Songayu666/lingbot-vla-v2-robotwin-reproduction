@@ -120,3 +120,83 @@ ValueError: Only FSDP training supports `enable_fsdp_offload`.
 
 The current parallel configuration is not compatible with FSDP offload.
 The required FSDP mode must be confirmed from the source code before retrying.
+
+## EXP-005 — Expert-Only Single-GPU Smoke Test
+
+### Date
+2026-09-20
+
+### Configuration
+- GPU count: 1
+- micro_batch_size: 1
+- global_batch_size: 1
+- gradient_accumulation_steps: 1
+- max_steps: 5
+- enable_gradient_checkpointing: true
+- enable_activation_offload: true
+- enable_fp32: false
+- train_expert_only: true
+- enable_fsdp_offload: false
+
+### Key change
+
+The Qwen/VLM backbone was frozen using:
+
+~~~~text
+train_expert_only = true
+~~~~
+
+The Action Expert and remaining trainable modules were optimized.
+
+### Result
+
+SUCCESS.
+
+The single-GPU smoke test completed all 5 optimization steps:
+
+~~~~text
+Step 1/5
+Step 2/5
+Step 3/5
+Step 4/5
+Step 5/5
+~~~~
+
+Training stopped normally after reaching:
+
+~~~~text
+max_steps = 5
+~~~~
+
+### Losses
+
+~~~~text
+Step 1: Loss 0.2732
+Step 2: Loss 0.3698
+Step 3: Loss 0.3519
+Step 4: Loss 0.4224
+Step 5: Loss 0.2661
+~~~~
+
+### GPU Memory
+
+~~~~text
+VRAM current after epoch 1: 33.16 GB
+VRAM peak: 40.60 GB
+~~~~
+
+### Conclusion
+
+Freezing the Qwen/VLM backbone makes LingBot-VLA v2 RoboTwin post-training
+feasible on the current single-GPU machine.
+
+The previous full-training configuration exceeded GPU memory during backward,
+while expert-only training completed forward, backward, optimization, and
+five consecutive training steps successfully.
+
+### Important limitation
+
+This configuration is not full-parameter post-training.
+
+The Qwen/VLM backbone is frozen and only the Action Expert and other remaining
+trainable modules are updated.
