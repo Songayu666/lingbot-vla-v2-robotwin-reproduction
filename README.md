@@ -3,7 +3,7 @@
 [![LingBot-VLA 2.0](https://img.shields.io/badge/model-LingBot--VLA%202.0-4c78a8)](https://github.com/Robbyant/lingbot-vla-v2)
 [![RoboTwin 2.0](https://img.shields.io/badge/benchmark-RoboTwin%202.0-f58518)](https://github.com/RoboTwin-Platform/RoboTwin)
 [![GPU](https://img.shields.io/badge/tested%20on-1%C3%97RTX%204090-76b900)](#实验环境)
-[![Status](https://img.shields.io/badge/status-smoke%20test%20passed-yellow)](#当前进度)
+[![Status](https://img.shields.io/badge/status-5000%20steps%20complete-brightgreen)](#当前进度)
 
 本仓库记录 **LingBot-VLA 2.0 在 RoboTwin 2.0 Clean-50 数据集上的单 GPU 复现过程**，重点保存数据清单、归一化统计、训练配置、显存实验和故障排查结论。
 
@@ -22,9 +22,11 @@
 | Expert-only 单卡 smoke test | ✅ | 连续完成 5 个优化步骤 |
 | RoboTwin 端到端评测链路 | ✅ | `lift_pot` 完成 100 回合 |
 | Smoke checkpoint 成功率 | ⚠️ | 0/100；5-step checkpoint 仅用于验证链路 |
-| 正式长时间训练与最终评测 | ⏳ | 尚未完成 |
+| Expert-only 正式训练 | ✅ | 完成 5000 步；从 step 3000 成功断点续训 |
+| 最终 HF checkpoint | ✅ | `global_step_5000/hf_ckpt` 保存并验证 |
+| Clean-50 正式评测 | 🔄 | 截至 2026-09-28：32/50 个任务完成，295/3200（9.22%） |
 
-当前结论是：约 48 GiB 显存的单张 RTX 4090 无法完成该配置的全参数反向传播；冻结 Qwen/VLM backbone、仅训练 Action Expert 及其余可训练模块后，可以稳定完成 forward、backward 和 optimizer step。
+当前结论是：约 48 GiB 显存的单张 RTX 4090 无法完成该配置的全参数反向传播；冻结 Qwen/VLM backbone、仅训练 Action Expert 及其余可训练模块后，可以稳定训练至 5000 步并完成 checkpoint 保存。Clean-50 的 50 任务评测仍在运行，因此 9.22% 是阶段性结果，不是最终成绩。
 
 ## 仓库内容
 
@@ -39,7 +41,8 @@
 │   └── robotwin.yaml                   # RoboTwin post-training 基础配置
 └── docs/
     ├── competition_log.md              # 数据准备、环境配置与复现全过程
-    └── experiment_log.md               # 单卡显存实验及结果
+    ├── experiment_log.md               # 单卡显存实验及结果
+    └── current_results.md               # 5000-step 训练及阶段性评测结果
 ```
 
 模型权重、数据集、训练 checkpoint、缓存和运行日志体积很大，均由 `.gitignore` 排除，不包含在本仓库中。
@@ -122,15 +125,16 @@ data:
   train_path: assets/training_data/robotwin_clean_50.txt
 ```
 
-### 5. 运行单卡 expert-only smoke test
+### 5. 运行单卡 expert-only 训练
 
-本次成功实验使用的关键参数如下：
+先用 5 步 smoke test 验证环境。本次正式训练使用的关键参数如下：
 
 ```yaml
 train:
   micro_batch_size: 1
   global_batch_size: 1
-  max_steps: 5
+  max_steps: 5000
+  save_steps: 500
   enable_gradient_checkpointing: true
   enable_activation_offload: true
   enable_fp32: false
@@ -148,7 +152,17 @@ bash train.sh tasks/vla/train_lingbotvla.py \
   configs/vla/robotwin/robotwin.yaml
 ```
 
-请先用少量步骤验证环境和显存，再根据实测单步耗时设置正式训练的 `max_steps`。不要把 smoke checkpoint 当作可用于比较成功率的正式模型。
+训练在约 step 3240 因机器重启中断，之后从 `global_step_3000` 自动恢复并完成至 step 5000。这验证了 `enable_resume: true` 的断点续训流程。
+
+### 6. 评测 5000-step checkpoint
+
+```bash
+MODEL_PATH="$PWD/outputs/competition_expert_only_24h_retry1/checkpoints/global_step_5000/hf_ckpt" \
+NUM_TASKS=50 \
+bash 02_代码材料/eval.sh clean
+```
+
+完整评测串行运行时间较长。中途可检查 `outputs/robotwin_eval/<run>/eval_results/*/_result.txt`，全部任务结束后以自动生成的 `stats.txt` 为最终结果。
 
 ## 已验证结果
 
@@ -168,13 +182,25 @@ Expert-only smoke test 连续完成 5 步：
 - 单任务端到端评测：完成 `lift_pot` 100/100 回合
 - 成功回合：0/100（符合 smoke checkpoint 只验证工程链路的预期）
 
+正式 expert-only 训练结果：
+
+- 训练步数：5000/5000
+- checkpoint：每 500 步保存；step 5000 的 DCP 与 HF checkpoint 均成功
+- 最后一步：Loss 0.0989，VLA Loss 0.0921，GradNorm 2.2439
+- 学习率：5.00e-05；Expert LR：1.41e-04
+- 训练后显存：33.16 GB；峰值显存：40.60 GB
+- 截至 2026-09-28 的 Clean-50 快照：32/50 个任务、295/3200 成功、9.22%
+
+阶段性逐任务结果见 [current_results.md](docs/current_results.md)。
+
 ## 已知限制
 
 - 当前成功方案是 `train_expert_only=true`，不属于全参数 post-training。
 - `robotwin.yaml` 保留了部分上游多 GPU 配置，正式单卡训练前必须再次核对 batch size、并行模式、精度和保存频率。
 - 数据清单和配置包含本地绝对路径，不能直接复制到另一台机器运行。
-- 当前没有正式长时间训练结果，也没有可与官方模型比较的 Clean/Randomized 成功率。
-- 5-step loss 只能证明训练链路可运行，不能说明模型已经收敛。
+- Clean-50 评测尚未完成，当前 9.22% 不能作为最终成绩。
+- 尚未运行 Randomized 评测，也没有与官方相同设置下的完整对照结果。
+- Expert-only 方案冻结了 Qwen/VLM backbone，结果不能等同于官方全参数 post-training。
 
 ## 可复现性说明
 

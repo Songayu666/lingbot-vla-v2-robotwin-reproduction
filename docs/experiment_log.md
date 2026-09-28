@@ -200,3 +200,63 @@ This configuration is not full-parameter post-training.
 
 The Qwen/VLM backbone is frozen and only the Action Expert and other remaining
 trainable modules are updated.
+
+## EXP-006 — Expert-Only 5000-Step Training
+
+### Date
+2026-09-23 to 2026-09-24
+
+### Configuration
+- GPU count: 1
+- micro/global batch size: 1/1
+- max steps: 5000
+- save interval: 500 steps
+- train expert only: enabled
+- gradient checkpointing: enabled
+- activation offload: enabled
+- automatic resume: enabled
+
+### Interruption and resume
+
+The first run was interrupted near step 3240 when the machine rebooted. The
+next run loaded `global_step_3000`, restored the distributed checkpoint, and
+continued successfully to step 5000.
+
+### Result
+
+SUCCESS. The run reached `max_steps=5000`. Both the distributed checkpoint and
+the Hugging Face checkpoint were saved at `global_step_5000`.
+
+Final metrics:
+
+~~~~text
+Loss 0.0989
+VLA Loss 0.0921
+Depth Loss 0.4610
+Future Depth Loss 0.7437
+Future Video Loss 0.0513
+GradNorm 2.2439
+LR 5.00e-05
+Expert LR 1.41e-04
+~~~~
+
+GPU memory after training was 33.16 GB, with a recorded peak of 40.60 GB.
+
+## EXP-007 — Clean-50 Evaluation
+
+### Date
+Started 2026-09-24; still running at the 2026-09-28 snapshot.
+
+### Configuration
+- checkpoint: `global_step_5000/hf_ckpt`
+- task config: `demo_clean`
+- tasks: 50
+- episodes per task: 100
+- execution: one inference server and one simulation slot on one GPU
+
+### Interim result
+
+32 of 50 tasks completed. The completed tasks produced 295 successful episodes
+out of 3200, for an interim success rate of 9.22%. See
+`docs/current_results.md` for the per-task snapshot. This is not the final
+Clean-50 result; the generated `stats.txt` after all tasks finish is authoritative.
