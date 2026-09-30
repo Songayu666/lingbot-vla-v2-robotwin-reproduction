@@ -24,9 +24,10 @@
 | Smoke checkpoint 成功率 | ⚠️ | 0/100；5-step checkpoint 仅用于验证链路 |
 | Expert-only 正式训练 | ✅ | 完成 5000 步；从 step 3000 成功断点续训 |
 | 最终 HF checkpoint | ✅ | `global_step_5000/hf_ckpt` 保存并验证 |
-| Clean-50 正式评测 | 🔄 | 截至 2026-09-28：32/50 个任务完成，295/3200（9.22%） |
+| Clean-50 正式评测 | ✅ | 50/50 个任务完成，553/5000（11.06%） |
+| Randomized-50 正式评测 | ⏳ | 尚未运行；计划在模型优化后执行 |
 
-当前结论是：约 48 GiB 显存的单张 RTX 4090 无法完成该配置的全参数反向传播；冻结 Qwen/VLM backbone、仅训练 Action Expert 及其余可训练模块后，可以稳定训练至 5000 步并完成 checkpoint 保存。Clean-50 的 50 任务评测仍在运行，因此 9.22% 是阶段性结果，不是最终成绩。
+当前结论是：约 48 GiB 显存的单张 RTX 4090 无法完成该配置的全参数反向传播；冻结 Qwen/VLM backbone、仅训练 Action Expert 及其余可训练模块后，可以稳定训练至 5000 步并完成 checkpoint 保存。该 checkpoint 的 Clean-50 完整评测成功率为 11.06%，可作为后续调优的第一版完整基线。
 
 ## 仓库内容
 
@@ -42,7 +43,9 @@
 └── docs/
     ├── competition_log.md              # 数据准备、环境配置与复现全过程
     ├── experiment_log.md               # 单卡显存实验及结果
-    └── current_results.md               # 5000-step 训练及阶段性评测结果
+    ├── current_results.md               # 5000-step 训练及完整 Clean-50 结果
+    └── results/
+        └── clean_5000step.json          # 机器可读的逐任务结果
 ```
 
 模型权重、数据集、训练 checkpoint、缓存和运行日志体积很大，均由 `.gitignore` 排除，不包含在本仓库中。
@@ -189,18 +192,20 @@ Expert-only smoke test 连续完成 5 步：
 - 最后一步：Loss 0.0989，VLA Loss 0.0921，GradNorm 2.2439
 - 学习率：5.00e-05；Expert LR：1.41e-04
 - 训练后显存：33.16 GB；峰值显存：40.60 GB
-- 截至 2026-09-28 的 Clean-50 快照：32/50 个任务、295/3200 成功、9.22%
+- Clean-50：50/50 个任务全部完成，553/5000 成功，11.06%
+- 评测总耗时：475862 秒，约 132.2 小时
+- 21 个任务至少成功一次，29 个任务为 0%
 
-阶段性逐任务结果见 [current_results.md](docs/current_results.md)。
+完整逐任务结果见 [current_results.md](docs/current_results.md)，机器可读结果见 [clean_5000step.json](docs/results/clean_5000step.json)。
 
 ## 已知限制
 
 - 当前成功方案是 `train_expert_only=true`，不属于全参数 post-training。
 - `robotwin.yaml` 保留了部分上游多 GPU 配置，正式单卡训练前必须再次核对 batch size、并行模式、精度和保存频率。
 - 数据清单和配置包含本地绝对路径，不能直接复制到另一台机器运行。
-- Clean-50 评测尚未完成，当前 9.22% 不能作为最终成绩。
 - 尚未运行 Randomized 评测，也没有与官方相同设置下的完整对照结果。
 - Expert-only 方案冻结了 Qwen/VLM backbone，结果不能等同于官方全参数 post-training。
+- 29/50 个 Clean 任务成功率仍为 0%，当前 checkpoint 适合作为工程基线，不是最终参赛模型。
 
 ## 可复现性说明
 

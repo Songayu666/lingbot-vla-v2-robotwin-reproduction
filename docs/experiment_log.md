@@ -245,7 +245,7 @@ GPU memory after training was 33.16 GB, with a recorded peak of 40.60 GB.
 ## EXP-007 — Clean-50 Evaluation
 
 ### Date
-Started 2026-09-24; still running at the 2026-09-28 snapshot.
+2026-09-24 to 2026-09-30
 
 ### Configuration
 - checkpoint: `global_step_5000/hf_ckpt`
@@ -254,9 +254,12 @@ Started 2026-09-24; still running at the 2026-09-28 snapshot.
 - episodes per task: 100
 - execution: one inference server and one simulation slot on one GPU
 
-### Interim result
+### Result
 
-32 of 50 tasks completed. The completed tasks produced 295 successful episodes
-out of 3200, for an interim success rate of 9.22%. See
-`docs/current_results.md` for the per-task snapshot. This is not the final
-Clean-50 result; the generated `stats.txt` after all tasks finish is authoritative.
+SUCCESS. All 50 tasks completed 100 episodes with no skipped tasks. The model
+produced 553 successful episodes out of 5000, for a Clean-50 success rate of
+11.06%. Total evaluation time was 475862 seconds (about 132.2 hours).
+
+21 tasks had at least one successful episode and 29 tasks scored 0%. See
+`docs/current_results.md` and `docs/results/clean_5000step.json` for the full
+result. Randomized-50 has not been run yet.

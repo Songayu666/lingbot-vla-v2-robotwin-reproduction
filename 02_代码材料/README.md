@@ -32,3 +32,9 @@ bash 02_代码材料/eval.sh clean
 脚本默认假设 RoboTwin 位于 `/home/zhongde/lingbot/RoboTwin`。其他机器可通过 `EVAL_WORKDIR`、`CONDA_SH`、`INFERENCE_ENV` 和 `SIM_ENV` 环境变量覆盖。
 
 模型权重、数据、checkpoint、视频和运行日志不会提交到 Git。
+
+## 实时查看仿真
+
+复制 `configs/demo_clean_gui.yml` 到 RoboTwin 的 `task_config/`，启动推理服务后，将评测客户端的 `task_config` 设置为 `demo_clean_gui`。该配置使用 `render_freq: 1` 打开 SAPIEN Viewer，适合少量回合的人工观察；正式批量评测仍应使用 `demo_clean`。
+
+评测客户端支持可选的 `--test_num N` 参数时，可用 `--test_num 1` 只观察一个回合。GUI 会增加运行时间，不应用于正式计分评测。
