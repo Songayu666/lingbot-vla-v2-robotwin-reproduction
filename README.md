@@ -3,7 +3,7 @@
 [![LingBot-VLA 2.0](https://img.shields.io/badge/model-LingBot--VLA%202.0-4c78a8)](https://github.com/Robbyant/lingbot-vla-v2)
 [![RoboTwin 2.0](https://img.shields.io/badge/benchmark-RoboTwin%202.0-f58518)](https://github.com/RoboTwin-Platform/RoboTwin)
 [![GPU](https://img.shields.io/badge/tested%20on-1%C3%97RTX%204090-76b900)](#实验环境)
-[![Status](https://img.shields.io/badge/status-5000%20steps%20complete-brightgreen)](#当前进度)
+[![Status](https://img.shields.io/badge/status-10k%20optimization%20running-blue)](#当前进度)
 
 本仓库记录 **LingBot-VLA 2.0 在 RoboTwin 2.0 Clean-50 数据集上的单 GPU 复现过程**，重点保存数据清单、归一化统计、训练配置、显存实验和故障排查结论。
 
@@ -25,9 +25,12 @@
 | Expert-only 正式训练 | ✅ | 完成 5000 步；从 step 3000 成功断点续训 |
 | 最终 HF checkpoint | ✅ | `global_step_5000/hf_ckpt` 保存并验证 |
 | Clean-50 正式评测 | ✅ | 50/50 个任务完成，553/5000（11.06%） |
+| 动作块诊断评测 | ✅ | chunk 10/25/50 共 360 回合；chunk10 最优，为 35/120（29.2%） |
+| 时间集成固定场景验证 | ✅ | 3 个困难任务 0/30，当前实现未带来提升 |
+| 困难抓取 4× 加权续训 | 🚧 | 从 step 5000 恢复；截至 2026-10-03 20:34 已完成 step 7063/10000 |
 | Randomized-50 正式评测 | ⏳ | 尚未运行；计划在模型优化后执行 |
 
-当前结论是：约 48 GiB 显存的单张 RTX 4090 无法完成该配置的全参数反向传播；冻结 Qwen/VLM backbone、仅训练 Action Expert 及其余可训练模块后，可以稳定训练至 5000 步并完成 checkpoint 保存。该 checkpoint 的 Clean-50 完整评测成功率为 11.06%，可作为后续调优的第一版完整基线。
+当前结论是：约 48 GiB 显存的单张 RTX 4090 无法完成该配置的全参数反向传播；冻结 Qwen/VLM backbone、仅训练 Action Expert 及其余可训练模块后，可以稳定训练至 5000 步并完成 checkpoint 保存。该 checkpoint 的 Clean-50 完整评测成功率为 11.06%。在此基线上，当前使用困难抓取任务 4× 采样权重续训至 10000 步；进度和诊断结论见 [优化阶段记录](docs/optimization_10k.md)。
 
 ## 仓库内容
 
@@ -44,6 +47,7 @@
     ├── competition_log.md              # 数据准备、环境配置与复现全过程
     ├── experiment_log.md               # 单卡显存实验及结果
     ├── current_results.md               # 5000-step 训练及完整 Clean-50 结果
+    ├── optimization_10k.md              # 动作块诊断与 10k 加权续训进度
     └── results/
         └── clean_5000step.json          # 机器可读的逐任务结果
 ```

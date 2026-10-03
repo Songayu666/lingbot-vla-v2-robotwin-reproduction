@@ -3,6 +3,8 @@
 models/
 cache/
 datasets/
+pretrained/
+*.egg-info/
 
 # ===== Training outputs =====
 output/
@@ -29,4 +31,3 @@ __pycache__/
 
 # ===== Local backups =====
 *.bak
-
