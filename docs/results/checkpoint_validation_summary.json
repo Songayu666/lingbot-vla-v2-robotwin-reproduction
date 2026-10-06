@@ -1,0 +1,142 @@
+[
+  {
+    "tasks": [
+      {
+        "task": "adjust_bottle",
+        "successes": 0,
+        "total": 7
+      },
+      {
+        "task": "click_bell",
+        "successes": 2,
+        "total": 7
+      },
+      {
+        "task": "hanging_mug",
+        "successes": 0,
+        "total": 7
+      },
+      {
+        "task": "lift_pot",
+        "successes": 0,
+        "total": 7
+      },
+      {
+        "task": "move_playingcard_away",
+        "successes": 0,
+        "total": 7
+      },
+      {
+        "task": "open_laptop",
+        "successes": 0,
+        "total": 7
+      },
+      {
+        "task": "open_microwave",
+        "successes": 4,
+        "total": 7
+      },
+      {
+        "task": "pick_dual_bottles",
+        "successes": 0,
+        "total": 7
+      },
+      {
+        "task": "place_container_plate",
+        "successes": 1,
+        "total": 7
+      },
+      {
+        "task": "press_stapler",
+        "successes": 7,
+        "total": 7
+      },
+      {
+        "task": "shake_bottle",
+        "successes": 3,
+        "total": 7
+      },
+      {
+        "task": "turn_switch",
+        "successes": 1,
+        "total": 7
+      }
+    ],
+    "successes": 18,
+    "total": 84,
+    "hard_successes": 1,
+    "step": 5000,
+    "chunk": 10,
+    "temporal_ensemble": false
+  },
+  {
+    "tasks": [
+      {
+        "task": "adjust_bottle",
+        "successes": 0,
+        "total": 7
+      },
+      {
+        "task": "click_bell",
+        "successes": 2,
+        "total": 7
+      },
+      {
+        "task": "hanging_mug",
+        "successes": 0,
+        "total": 7
+      },
+      {
+        "task": "lift_pot",
+        "successes": 0,
+        "total": 7
+      },
+      {
+        "task": "move_playingcard_away",
+        "successes": 0,
+        "total": 7
+      },
+      {
+        "task": "open_laptop",
+        "successes": 1,
+        "total": 7
+      },
+      {
+        "task": "open_microwave",
+        "successes": 7,
+        "total": 7
+      },
+      {
+        "task": "pick_dual_bottles",
+        "successes": 0,
+        "total": 7
+      },
+      {
+        "task": "place_container_plate",
+        "successes": 0,
+        "total": 7
+      },
+      {
+        "task": "press_stapler",
+        "successes": 5,
+        "total": 7
+      },
+      {
+        "task": "shake_bottle",
+        "successes": 4,
+        "total": 7
+      },
+      {
+        "task": "turn_switch",
+        "successes": 2,
+        "total": 7
+      }
+    ],
+    "successes": 21,
+    "total": 84,
+    "hard_successes": 1,
+    "step": 6500,
+    "chunk": 10,
+    "temporal_ensemble": false
+  }
+]

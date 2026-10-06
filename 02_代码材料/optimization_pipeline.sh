@@ -74,9 +74,9 @@ POST_OUT="$PIPE_DIR/post_train_10k_eval"
 echo "[$(date '+%F %T')] 开始 step10000 固定场景快速评测"
 if MODEL_PATH="$NEW_MODEL" OUT_DIR="$POST_OUT" PORT=9350 EPISODES=3 \
   TASKS="lift_pot hanging_mug click_bell open_microwave adjust_bottle move_playingcard_away place_container_plate open_laptop pick_dual_bottles press_stapler shake_bottle turn_switch" \
-  VIDEO=True GUI=0 MANIFEST="$MANIFEST" TEMPORAL_ENSEMBLE=True \
+  VIDEO=True GUI=0 MANIFEST="$MANIFEST" TEMPORAL_ENSEMBLE=False \
   ENSEMBLE_STRIDE=5 ENSEMBLE_ALPHA=0.1 ENSEMBLE_HORIZON=8 \
-  bash "$DIAG/run.sh" 25; then
+  bash "$DIAG/run.sh" 10; then
   touch "$POST_OUT/.complete"
   touch "$PIPE_DIR/.complete"
   echo "[$(date '+%F %T')] 优化流水线全部完成"

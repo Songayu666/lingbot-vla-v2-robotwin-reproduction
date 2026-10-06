@@ -1,0 +1,362 @@
+{
+  "adjust_bottle": [
+    {
+      "seed": 100006,
+      "instruction": "Lift the brown bottle from the table using the right arm."
+    },
+    {
+      "seed": 100008,
+      "instruction": "Pick up the green plastic bottle with ridged bottom using the correct arm"
+    },
+    {
+      "seed": 100010,
+      "instruction": "Pick up the green plastic bottle with ridged bottom from the table head-up."
+    },
+    {
+      "seed": 100011,
+      "instruction": "Pick up the bottle with red screw cap carefully using the left arm"
+    },
+    {
+      "seed": 100012,
+      "instruction": "Grab the green bottle on the table and raise it."
+    },
+    {
+      "seed": 100013,
+      "instruction": "Use the right arm to grab the brown bottle upright"
+    },
+    {
+      "seed": 100015,
+      "instruction": "Use the right arm to grab the bottle the plastic soda bottle"
+    }
+  ],
+  "click_bell": [
+    {
+      "seed": 100003,
+      "instruction": "Use the right arm to press the medium-sized bell's top center."
+    },
+    {
+      "seed": 100004,
+      "instruction": "Direct the left arm to click the blue bell with glossy finish's top."
+    },
+    {
+      "seed": 100005,
+      "instruction": "Direct the right arm to click the blue bell with glossy finish's top."
+    },
+    {
+      "seed": 100006,
+      "instruction": "Use the right arm to press the palm-sized bell's top center."
+    },
+    {
+      "seed": 100007,
+      "instruction": "Click the palm-sized bell's top center on the table."
+    },
+    {
+      "seed": 100008,
+      "instruction": "Find the lightweight bell with smooth surface and click its top center."
+    },
+    {
+      "seed": 100009,
+      "instruction": "Use the right arm to press the blue bell with glossy finish's top center."
+    }
+  ],
+  "hanging_mug": [
+    {
+      "seed": 100004,
+      "instruction": "Grab the cylindrical mug with handle, turn it, set it on the table, then hang it on the medium-sized rack."
+    },
+    {
+      "seed": 100005,
+      "instruction": "Pick the medium black mug with the left arm, rotate, place it, then hang it on the rack with straight and slanted rods."
+    },
+    {
+      "seed": 100006,
+      "instruction": "Lift the beige mug, rotate it, put it down, then attach it to the rack with straight and slanted rods."
+    },
+    {
+      "seed": 100008,
+      "instruction": "Grab the ceramic mug on the table, rotate it, set it down in the middle, then hang it onto the medium-sized rack."
+    },
+    {
+      "seed": 100009,
+      "instruction": "Grab the beige mug on the table, rotate it, set it down in the middle, then hang it onto the medium-sized rack."
+    },
+    {
+      "seed": 100010,
+      "instruction": "Lift the ceramic mug from the table, spin it, set it down, and hang it on the dark gray rack with flat back."
+    },
+    {
+      "seed": 100011,
+      "instruction": "Grab the mug with smooth texture, turn it, set it on the table, then hang it on the medium-sized rack."
+    }
+  ],
+  "lift_pot": [
+    {
+      "seed": 100005,
+      "instruction": "Use both arms for the gray kitchenpot with rounded edges"
+    },
+    {
+      "seed": 100009,
+      "instruction": "Lift the gray kitchenpot with rounded edges using both arms"
+    },
+    {
+      "seed": 100012,
+      "instruction": "Use both arms to lift the dark gray cooking kitchenpot"
+    },
+    {
+      "seed": 100014,
+      "instruction": "Lift the kitchenpot with two side handles using both arms"
+    },
+    {
+      "seed": 100019,
+      "instruction": "Lift the dark gray cooking kitchenpot upward using arms."
+    },
+    {
+      "seed": 100020,
+      "instruction": "Together lift the kitchenpot with two side handles up"
+    },
+    {
+      "seed": 100022,
+      "instruction": "Lift the gray kitchenpot with rounded edges upward using arms."
+    }
+  ],
+  "move_playingcard_away": [
+    {
+      "seed": 100003,
+      "instruction": "Use the right arm to grab the hard black box for card deck and relocate it."
+    },
+    {
+      "seed": 100004,
+      "instruction": "Pick up the rectangular playingcards case with patterns and shift it outward."
+    },
+    {
+      "seed": 100005,
+      "instruction": "Pick up the rectangular red playingcards holder and move it outward."
+    },
+    {
+      "seed": 100006,
+      "instruction": "Pick up the small box for playingcards and move it outward."
+    },
+    {
+      "seed": 100007,
+      "instruction": "Pick up the hard black box for card deck and shift it outward."
+    },
+    {
+      "seed": 100008,
+      "instruction": "Pick up the gold text on playing cards box and shift it outward."
+    },
+    {
+      "seed": 100009,
+      "instruction": "Use the left arm to grab the rectangular red playingcards holder and relocate it."
+    }
+  ],
+  "open_laptop": [
+    {
+      "seed": 100003,
+      "instruction": "Open the medium laptop with black case carefully using the right arm."
+    },
+    {
+      "seed": 100004,
+      "instruction": "Lift the black laptop with compact design using the left arm."
+    },
+    {
+      "seed": 100005,
+      "instruction": "Pull up the folding laptop with black keyboard's lid."
+    },
+    {
+      "seed": 100006,
+      "instruction": "Lift the black laptop fitting laptop bags's lid gently."
+    },
+    {
+      "seed": 100007,
+      "instruction": "Lift the portable laptop using the right arm."
+    },
+    {
+      "seed": 100008,
+      "instruction": "Lift the black laptop slightly rounded at edges using the left arm."
+    },
+    {
+      "seed": 100009,
+      "instruction": "Open the laptop with glossy black display with one motion."
+    }
+  ],
+  "open_microwave": [
+    {
+      "seed": 100005,
+      "instruction": "Use the left arm to open the medium-sized rectangular microwave with textured top."
+    },
+    {
+      "seed": 100008,
+      "instruction": "Grab the medium-sized rectangular microwave with textured top's handle and pull to open it."
+    },
+    {
+      "seed": 100009,
+      "instruction": "Grab the medium-sized rectangular microwave with textured top's handle and pull to open it."
+    },
+    {
+      "seed": 100012,
+      "instruction": "Use the left arm to pull the handle of the medium gray microwave with top vents."
+    },
+    {
+      "seed": 100013,
+      "instruction": "Pull the dark gray microwave open with the left arm."
+    },
+    {
+      "seed": 100016,
+      "instruction": "Pull the medium-sized microwave with angled walls open with the left arm."
+    },
+    {
+      "seed": 100018,
+      "instruction": "Move the left arm and open the dark gray microwave."
+    }
+  ],
+  "pick_dual_bottles": [
+    {
+      "seed": 100003,
+      "instruction": "Take hold of the bottle with red screw cap and the green bottle with white label at once."
+    },
+    {
+      "seed": 100004,
+      "instruction": "Use one arm to grab the bottle with red screw cap, the other for the green bottle."
+    },
+    {
+      "seed": 100005,
+      "instruction": "Pick the bottle with red screw cap with one arm, the green plastic bottle with ridged bottom with the other."
+    },
+    {
+      "seed": 100006,
+      "instruction": "Pick up the brown bottle and the green plastic bottle with ridged bottom simultaneously."
+    },
+    {
+      "seed": 100007,
+      "instruction": "Use one arm to grab the brown bottle, the other for the green plastic bottle with ridged bottom."
+    },
+    {
+      "seed": 100008,
+      "instruction": "Use one arm to grab the plastic soda bottle, the other for the green bottle."
+    },
+    {
+      "seed": 100009,
+      "instruction": "Lift the brown bottle and the green bottle using both arms."
+    }
+  ],
+  "place_container_plate": [
+    {
+      "seed": 100005,
+      "instruction": "Grab container with the light blue bowl with darkened rim, place it on the smooth round plate for serving."
+    },
+    {
+      "seed": 100006,
+      "instruction": "Move the rusty-looking grayish metallic cup to set the container on the gray plate"
+    },
+    {
+      "seed": 100007,
+      "instruction": "Grab container with the light gray smooth round bowl, place it on the gray plate for dining."
+    },
+    {
+      "seed": 100008,
+      "instruction": "Move the simple round bowl to set the container on the gray plate"
+    },
+    {
+      "seed": 100009,
+      "instruction": "Set the container on the gray plate with the palm-sized glossy bowl."
+    },
+    {
+      "seed": 100010,
+      "instruction": "Grab container with the light gray smooth round bowl, place it on the gray plate for dining."
+    },
+    {
+      "seed": 100011,
+      "instruction": "Move the smooth bowl with glossy finish to set the container on the smooth round plate for serving"
+    }
+  ],
+  "press_stapler": [
+    {
+      "seed": 100004,
+      "instruction": "Use the left arm to press the paper stapler with curved handle."
+    },
+    {
+      "seed": 100005,
+      "instruction": "Push the paper stapler with curved handle down with one arm the right arm."
+    },
+    {
+      "seed": 100006,
+      "instruction": "Press the stapler the black stapler with the arm the right arm."
+    },
+    {
+      "seed": 100007,
+      "instruction": "Use the left arm to press the blue and white stapler."
+    },
+    {
+      "seed": 100009,
+      "instruction": "Press the small stapler with simple design firmly using your arm."
+    },
+    {
+      "seed": 100010,
+      "instruction": "Press down on the rectangular stapler with curved corners with the right arm"
+    },
+    {
+      "seed": 100011,
+      "instruction": "Use the right arm to press the stapler the stapler with smooth plastic body."
+    }
+  ],
+  "shake_bottle": [
+    {
+      "seed": 100004,
+      "instruction": "Use the left arm to grab the bottle with curved neck design and shake."
+    },
+    {
+      "seed": 100005,
+      "instruction": "Pick up the yellow bottle with white cap with the left arm and shake."
+    },
+    {
+      "seed": 100006,
+      "instruction": "Grab the plastic Starbucks bottle and shake it."
+    },
+    {
+      "seed": 100013,
+      "instruction": "Grab the light gray bottle, shake it properly, then set it down."
+    },
+    {
+      "seed": 100015,
+      "instruction": "Pick up the bottle with green label and white lid and shake it."
+    },
+    {
+      "seed": 100018,
+      "instruction": "Pick up the bottle with ridged neck and shake it."
+    },
+    {
+      "seed": 100020,
+      "instruction": "Grab the bottle with glossy surface and give it a shake."
+    }
+  ],
+  "turn_switch": [
+    {
+      "seed": 100004,
+      "instruction": "Activate the switch at the matte black plastic switch"
+    },
+    {
+      "seed": 100005,
+      "instruction": "Click the hand-sized square electrical switch with the right arm"
+    },
+    {
+      "seed": 100006,
+      "instruction": "Move and click the the gray switch"
+    },
+    {
+      "seed": 100007,
+      "instruction": "Activate the switch at the beige switch with darker brown top"
+    },
+    {
+      "seed": 100008,
+      "instruction": "Activate the switch at the red ON OFF labeled toggle switch"
+    },
+    {
+      "seed": 100009,
+      "instruction": "Press the lightweight plastic switch angled edges using the left arm"
+    },
+    {
+      "seed": 100010,
+      "instruction": "Click the switch with circular black buttons with the left arm."
+    }
+  ]
+}

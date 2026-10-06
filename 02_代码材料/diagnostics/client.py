@@ -179,7 +179,10 @@ def main(usr_args):
         if not fixed_episodes:
             raise ValueError(f"Manifest has no episodes for task: {task_name}")
     # Keep the official default at 100, while allowing short interactive runs.
-    test_num = len(fixed_episodes) if fixed_episodes else int(usr_args.get("test_num", 100))
+    test_num = int(usr_args.get("test_num", 100))
+    if fixed_episodes:
+        fixed_episodes = fixed_episodes[:test_num]
+        test_num = len(fixed_episodes)
     topk = 1
 
     # model = get_model(usr_args)
@@ -303,6 +306,8 @@ def eval_policy(task_name,
 
         args["render_freq"] = render_freq
 
+        random.seed(now_seed)
+        np.random.seed(now_seed)
         TASK_ENV.setup_demo(now_ep_num=now_id, seed=now_seed, is_test=True, **args)
         episode_info_list = [episode_info["info"]]
         if fixed_episodes:
