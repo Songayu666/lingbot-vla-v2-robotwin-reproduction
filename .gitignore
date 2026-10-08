@@ -1,6 +1,6 @@
 
 # ===== Local models / datasets / caches =====
-models/
+/models/
 cache/
 datasets/
 pretrained/

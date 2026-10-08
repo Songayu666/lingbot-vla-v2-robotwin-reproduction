@@ -1,0 +1,170 @@
+{
+  "adjust_bottle": [
+    {
+      "seed": 100001,
+      "instruction": "Use the right arm to grab the bottle the brown bottle"
+    },
+    {
+      "seed": 100002,
+      "instruction": "Pick up the green bottle from the table head-up."
+    },
+    {
+      "seed": 100005,
+      "instruction": "Pick up the green plastic bottle with ridged bottom using the left arm in an upright position"
+    }
+  ],
+  "click_bell": [
+    {
+      "seed": 100000,
+      "instruction": "Use the right arm to press the blue bell with glossy finish's top center."
+    },
+    {
+      "seed": 100001,
+      "instruction": "Use the right arm to press the palm-sized bell's top center."
+    },
+    {
+      "seed": 100002,
+      "instruction": "Use the left arm to press the palm-sized bell's top center."
+    }
+  ],
+  "hanging_mug": [
+    {
+      "seed": 100000,
+      "instruction": "Lift the white coffee mug from the table, spin it, set it down, and hang it on the rack with straight and slanted rods."
+    },
+    {
+      "seed": 100001,
+      "instruction": "Pick up the ceramic mug, rotate it, place it on the table, and hang it on the rack with straight and slanted rods."
+    },
+    {
+      "seed": 100003,
+      "instruction": "Grab the mug with rounded bottom and handle on the table, rotate it, set it down in the middle, then hang it onto the dark gray rack with flat back."
+    }
+  ],
+  "lift_pot": [
+    {
+      "seed": 100000,
+      "instruction": "Lift the gray kitchenpot with rounded edges with both arms"
+    },
+    {
+      "seed": 100002,
+      "instruction": "Grab the dark gray cooking kitchenpot with both arms."
+    },
+    {
+      "seed": 100003,
+      "instruction": "Use both arms to lift the dark gray cooking kitchenpot"
+    }
+  ],
+  "move_playingcard_away": [
+    {
+      "seed": 100000,
+      "instruction": "Pick up the gold text on playing cards box and move it outward."
+    },
+    {
+      "seed": 100001,
+      "instruction": "Grab the hard black box for card deck and move it outward."
+    },
+    {
+      "seed": 100002,
+      "instruction": "Use the left arm to grab the small packet of playingcards and move it outward."
+    }
+  ],
+  "open_laptop": [
+    {
+      "seed": 100000,
+      "instruction": "Lift the laptop with glossy black display's lid gently."
+    },
+    {
+      "seed": 100001,
+      "instruction": "Grab the silver laptop and open it."
+    },
+    {
+      "seed": 100002,
+      "instruction": "Open the sleek laptop using the right arm."
+    }
+  ],
+  "open_microwave": [
+    {
+      "seed": 100000,
+      "instruction": "Pull the medium-sized rectangular microwave with textured top open with the left arm."
+    },
+    {
+      "seed": 100001,
+      "instruction": "Open the dark gray microwave by pulling its door handle."
+    },
+    {
+      "seed": 100003,
+      "instruction": "Grab the medium gray microwave with top vents's handle and pull to open it."
+    }
+  ],
+  "pick_dual_bottles": [
+    {
+      "seed": 100000,
+      "instruction": "Pick up the brown bottle and the green plastic bottle with ridged bottom simultaneously."
+    },
+    {
+      "seed": 100001,
+      "instruction": "Grab the brown bottle and the green plastic bottle with ridged bottom with arms."
+    },
+    {
+      "seed": 100002,
+      "instruction": "Pick the plastic soda bottle, then pick the green bottle with white label."
+    }
+  ],
+  "place_container_plate": [
+    {
+      "seed": 100000,
+      "instruction": "Grab container with the light blue bowl with darkened rim, place it on the gray plate."
+    },
+    {
+      "seed": 100003,
+      "instruction": "Place the container onto the smooth round plate for serving with the cup with rounded edges"
+    },
+    {
+      "seed": 100004,
+      "instruction": "Set the container on the smooth round plate for serving with the ridged cylindrical cup."
+    }
+  ],
+  "press_stapler": [
+    {
+      "seed": 100000,
+      "instruction": "Press the stapler the rectangular stapler with curved corners with the arm the left arm."
+    },
+    {
+      "seed": 100002,
+      "instruction": "Press down on the red plastic stapler with the left arm"
+    },
+    {
+      "seed": 100003,
+      "instruction": "Use the right arm to press down on the plastic stapler."
+    }
+  ],
+  "shake_bottle": [
+    {
+      "seed": 100000,
+      "instruction": "Grab the bottle with rounded edges and shake it."
+    },
+    {
+      "seed": 100001,
+      "instruction": "Pick up the bottle with ridged neck and shake it."
+    },
+    {
+      "seed": 100003,
+      "instruction": "Use the right arm to pick the plastic Starbucks bottle."
+    }
+  ],
+  "turn_switch": [
+    {
+      "seed": 100000,
+      "instruction": "Move and click the the lightweight plastic switch angled edges"
+    },
+    {
+      "seed": 100001,
+      "instruction": "Click the beige switch with darker brown top using the right arm"
+    },
+    {
+      "seed": 100002,
+      "instruction": "Click the small flat switch tan top with the right arm."
+    }
+  ]
+}

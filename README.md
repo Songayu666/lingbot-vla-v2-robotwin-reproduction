@@ -3,7 +3,7 @@
 [![LingBot-VLA 2.0](https://img.shields.io/badge/model-LingBot--VLA%202.0-4c78a8)](https://github.com/Robbyant/lingbot-vla-v2)
 [![RoboTwin 2.0](https://img.shields.io/badge/benchmark-RoboTwin%202.0-f58518)](https://github.com/RoboTwin-Platform/RoboTwin)
 [![GPU](https://img.shields.io/badge/tested%20on-1%C3%97RTX%204090-76b900)](#实验环境)
-[![Status](https://img.shields.io/badge/status-10k%20validation%20complete-brightgreen)](#当前进度)
+[![Status](https://img.shields.io/badge/status-training%20ablation%20complete-brightgreen)](#当前进度)
 
 本仓库记录 **LingBot-VLA 2.0 在 RoboTwin 2.0 Clean-50 数据集上的单 GPU 复现过程**，重点保存数据清单、归一化统计、训练配置、显存实验和故障排查结论。
 
@@ -34,7 +34,25 @@
 
 当前结论是：约 48 GiB 显存的单张 RTX 4090 无法完成该配置的全参数反向传播；冻结 Qwen/VLM backbone、仅训练 Action Expert 及其余可训练模块后，可以稳定训练至 5000 步并完成 checkpoint 保存。该 checkpoint 的 Clean-50 完整评测成功率为 11.06%。在此基线上，已使用困难抓取任务 4× 采样权重续训至 10000 步；进度和诊断结论见 [优化阶段记录](docs/optimization_10k.md)。
 
-6500 步目前是候选模型，追加验证提升 3.6 个百分点，困难抓取仍未解决；尚未启动下一轮训练。小规模诊断结果不等同于完整 Clean-50 成绩。
+6500 步仍保留为候选模型。2026-10-08 已完成从6500到7000步的训练损失调优及配对评测，未出现CUDA OOM。新方法7000步为9/36，同步数低学习率对照为7/36，但与原6500步在相同逐回合随机种子协议下的9/36持平，困难抓取仍未解决。不能据此宣称总体提升。
+
+### 最新训练实验（2026-10-08）
+
+新方法屏蔽补齐动作，并将夹爪开合附近动作权重设为2。它仅借鉴加权学习思想，不是Sirius论文复现。使用原4倍困难任务采样清单、0.3倍恢复学习率，保留原始模型。
+
+| 检查点 | 低学习率对照 | 新训练损失 |
+|---|---:|---:|
+| 6750步 | 8/36（22.2%） | 6/36（16.7%） |
+| 7000步 | 7/36（19.4%） | 9/36（25.0%） |
+
+四组均为固定12任务×3回合，Euler、执行块10、逐回合固定采样种子；这些场景已反复用于开发，不是独立测试集，也不能与旧版未固定推理随机种子的12/36直接比较。新模型摇瓶3/3，但提锅、双瓶抓取、容器放盘均0/3。下一步建议仅屏蔽填充的消融，尚未启动。
+
+训练历时约2小时38分，实际完成500次更新；6项测试与GPU BF16反向传播检查通过，显存抽样约42.3/48GiB（非全程峰值）。全部对照评测于2026-10-08 01:46结束。
+
+- [实验设计、运行记录及结论](03_实验记录/2026-10-07_训练损失调优.md)
+- [逐任务机器可读结果与场景清单](docs/results/phase_loss_20261008/)
+- [训练与自动评测脚本](02_代码材料/run_phase_trial.sh)
+- [代码覆盖文件与复现边界](docs/code_overlay.md)
 
 ## 仓库内容
 
@@ -237,4 +255,4 @@ Expert-only smoke test 连续完成 5 步：
 - [QwenLM/Qwen3-VL](https://github.com/QwenLM/Qwen3-VL)
 - [huggingface/lerobot](https://github.com/huggingface/lerobot)
 
-所有模型、代码和数据的权利与许可证归各自作者及项目所有。本仓库只发布复现配置、统计文件和实验记录。
+所有模型、代码和数据的权利与许可证归各自作者及项目所有。本仓库发布复现配置、统计文件、实验记录及部分修改后的上游代码文件；保留上游许可证，完整运行仍依赖上游项目。

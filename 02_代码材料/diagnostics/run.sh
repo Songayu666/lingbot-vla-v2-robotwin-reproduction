@@ -42,6 +42,8 @@ export CUDA_VISIBLE_DEVICES="${CUDA_VISIBLE_DEVICES:-0}"
 export QWEN3VL_PATH="${QWEN3VL_PATH:-/home/zhongde/lingbot/models/Qwen3-VL-4B-Instruct}"
 printf 'model=%s\nlength=%s\nepisodes=%s\ntasks=%s\nmanifest=%s\nvideo=%s\ntemporal_ensemble=%s\nensemble_stride=%s\nensemble_alpha=%s\nensemble_horizon=%s\n' \
   "$MODEL" "$LENGTH" "$EPISODES" "$TASKS" "$MANIFEST" "$VIDEO" "$TEMPORAL_ENSEMBLE" "$ENSEMBLE_STRIDE" "$ENSEMBLE_ALPHA" "$ENSEMBLE_HORIZON" > "$OUT/settings.txt"
+printf 'adaptive_horizon=%s\n' "${ADAPTIVE_HORIZON:-False}" >> "$OUT/settings.txt"
+printf 'flow_solver=%s\nper_episode_sampling_seed=%s\n' "${LINGBOT_FLOW_SOLVER:-euler}" "${PER_EPISODE_SAMPLING_SEED:-False}" >> "$OUT/settings.txt"
 cd "$ROOT"
 CHUNK_RET=True
 [[ "$TEMPORAL_ENSEMBLE" == True || "$TEMPORAL_ENSEMBLE" == true ]] && CHUNK_RET=False

@@ -1,0 +1,14 @@
+{
+  "lift_pot": {
+    "frames": 331,
+    "transition_pairs": 78
+  },
+  "pick_dual_bottles": {
+    "frames": 240,
+    "transition_pairs": 26
+  },
+  "place_container_plate": {
+    "frames": 477,
+    "transition_pairs": 78
+  }
+}

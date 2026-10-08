@@ -1,0 +1,22 @@
+{
+  "phase_loss/padded_fraction": [
+    {
+      "step": 6501,
+      "value": 0.9799999594688416
+    },
+    {
+      "step": 6502,
+      "value": 0.0
+    }
+  ],
+  "phase_loss/event_fraction": [
+    {
+      "step": 6501,
+      "value": 0.0
+    },
+    {
+      "step": 6502,
+      "value": 0.36000001430511475
+    }
+  ]
+}

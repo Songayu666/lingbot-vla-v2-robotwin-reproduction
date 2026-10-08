@@ -1,0 +1,8 @@
+{
+  "lingbotvla/models/vla/lingbot_vla/phase_loss.py": "8aa8e146c698cfb892020bf13ebf92f29da629afa726af944e2bd5555e32e4bd",
+  "lingbotvla/models/vla/lingbot_vla/modeling_lingbot_vla_v2.py": "6fb626ef4d809df0830603a23cf329f84bad592be9434e914737163fbe91ac38",
+  "lingbotvla/models/vla/lingbot_vla/configuration_lingbot_vla.py": "c05ba984259a975c81295ba75b6789fb8390348fcaf12efb6e8b8a7350d07a34",
+  "tasks/vla/train_lingbotvla.py": "46d008a4bc47ca12e528b6aae6dc1265b7ac4b14350f6822af9774623c0c34d5",
+  "02_\u4ee3\u7801\u6750\u6599/configs/train_robotwin_phase_6500_7000.yaml": "ea373eebc6980e75ee471236b0f1219e7c0551d9b20ed26270e3b5c0b1164d2f",
+  "02_\u4ee3\u7801\u6750\u6599/run_phase_trial.sh": "777468d8275f75160abcbeb9b1cb2f80b107f72c5c51de9416668f76971fe7c3"
+}

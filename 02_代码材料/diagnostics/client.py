@@ -352,7 +352,10 @@ def eval_policy(task_name,
         path_to_pi_model = None
         if usr_args is not None and "new_ckpt_path" in usr_args:
             path_to_pi_model = usr_args['new_ckpt_path']
-        ret = model.infer(dict(reset = True, robo_name=usr_args['robo_name'], path_to_pi_model=path_to_pi_model))
+        reset_payload = dict(reset=True, robo_name=usr_args["robo_name"], path_to_pi_model=path_to_pi_model)
+        if os.environ.get("PER_EPISODE_SAMPLING_SEED", "False").lower() == "true":
+            reset_payload["sampling_seed"] = int(now_seed)
+        ret = model.infer(reset_payload)
         
         while TASK_ENV.take_action_cnt<TASK_ENV.step_lim and not succ:
             observation = TASK_ENV.get_obs()
@@ -386,6 +389,21 @@ def eval_policy(task_name,
             ret = model.infer(formatted_observation) #(TASK_ENV, model, observation)
             action, latency = ret['action'], ret['server_timing']
             if len(action.shape) == 2:
+                if os.environ.get("ADAPTIVE_HORIZON", "False").lower() == "true":
+                    from action_horizon import execution_length
+                    planned_length = len(action)
+                    execute_length = execution_length(
+                        action, formatted_observation["observation.state"])
+                    trace_dir = Path(usr_args["output_dir"]) / task_name
+                    trace_dir.mkdir(parents=True, exist_ok=True)
+                    with (trace_dir / "action_trace.jsonl").open("a") as trace:
+                        trace.write(json.dumps({
+                            "seed": int(now_seed), "step": int(TASK_ENV.take_action_cnt),
+                            "planned": planned_length, "executed": execute_length,
+                            "state": np.asarray(formatted_observation["observation.state"]).tolist(),
+                            "actions": np.asarray(action).tolist(),
+                        }) + "\n")
+                    action = action[:execute_length]
                 initial_obs = False
                 for act in action:
                     if initial_obs: # ensure the video is correct, but slow down simulation
