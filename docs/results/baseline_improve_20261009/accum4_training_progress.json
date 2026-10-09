@@ -1,0 +1,15 @@
+{
+  "step": 6750,
+  "target_step": 6750,
+  "resumed_step": 6500,
+  "updates_this_process": 250,
+  "samples_this_process": 1000,
+  "microbatches": 4,
+  "global_batch_size": 4,
+  "step_seconds": 73.10856223106384,
+  "loss": 0.10677041858434677,
+  "grad_norm": 0.9631712436676025,
+  "peak_allocated_gib": 40.601364612579346,
+  "peak_reserved_gib": 40.87890625,
+  "timestamp": 1791480356.8576727
+}

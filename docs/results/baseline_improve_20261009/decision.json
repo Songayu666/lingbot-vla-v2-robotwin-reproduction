@@ -1,0 +1,7 @@
+{
+  "baseline_screen": 9,
+  "best_trial": "accum4",
+  "trial_screen": 9,
+  "promoted": false,
+  "note": "No screening improvement over baseline; stop without further training or large evaluation"
+}

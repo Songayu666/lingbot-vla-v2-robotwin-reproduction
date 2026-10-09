@@ -1,4 +1,5 @@
 import json
+from lingbotvla.optim.accumulation import normalized_microbatch_loss, check_microbatch_count, finite_grad_norm
 import os
 import re
 import time
@@ -690,6 +691,8 @@ def main():
         args.train.enable_activation_offload, args.train.enable_gradient_checkpointing, args.train.activation_gpu_limit
     )
     model.train()
+    resumed_global_step = global_step
+    torch.cuda.reset_peak_memory_stats()
     logger.info(
         f"rank{args.train.local_rank} Start training, train_steps: {args.train.train_steps}, epochs: {args.train.num_train_epochs}"
     )
@@ -730,6 +733,11 @@ def main():
             except StopIteration:
                 logger.info(f"epoch:{epoch} Dataloader finished with drop_last {args.data.drop_last}")
                 break
+
+            if not (args.train.rmpad or args.train.rmpad_with_pos_ids):
+                check_microbatch_count(len(micro_batches), args.train.gradient_accumulation_steps)
+            if global_step == resumed_global_step + 1:
+                logger.info_rank0(f"Verified accumulation: {len(micro_batches)} microbatches per update, micro_batch_size={args.train.micro_batch_size}")
 
             if global_step == 1:
                 helper.print_example(example=micro_batches[0], rank=args.train.local_rank)
@@ -816,7 +824,7 @@ def main():
                     else:
                         raise ValueError(f"Unexpected model output length: {len(model_outputs)}")
 
-                    loss = loss / len(micro_batches)
+                    loss = normalized_microbatch_loss(loss, len(micro_batches))
                     vla_loss = vla_loss / len(micro_batches)
                     depth_loss = depth_loss / len(micro_batches)
                     future_depth_loss = future_depth_loss / len(micro_batches)
@@ -886,6 +894,7 @@ def main():
             else:
                 grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), max_grad_norm, foreach=True)
 
+            grad_norm = finite_grad_norm(grad_norm)
             optimizer.step()
             lr_scheduler.step()
             optimizer.zero_grad()
@@ -906,6 +915,22 @@ def main():
             else:
                 lr = max(all_lrs)
                 expert_lr = None
+            if args.train.global_rank == 0:
+                progress = dict(
+                    step=global_step, target_step=args.train.max_steps,
+                    resumed_step=resumed_global_step,
+                    updates_this_process=global_step-resumed_global_step,
+                    samples_this_process=(global_step-resumed_global_step)*args.train.global_batch_size,
+                    microbatches=len(micro_batches), global_batch_size=args.train.global_batch_size,
+                    step_seconds=delta_time, loss=total_loss, grad_norm=grad_norm,
+                    peak_allocated_gib=torch.cuda.max_memory_allocated()/2**30,
+                    peak_reserved_gib=torch.cuda.max_memory_reserved()/2**30,
+                    timestamp=time.time(),
+                )
+                progress_path = os.path.join(args.train.output_dir, "training_progress.json")
+                with open(progress_path + ".tmp", "w") as f:
+                    json.dump(progress, f, indent=2)
+                os.replace(progress_path + ".tmp", progress_path)
             train_metrics = environ_meter.step(delta_time, global_step=global_step)
             data_loader_tqdm.update()
             expert_lr_str = f"Expert_LR {expert_lr:.2e}, " if expert_lr is not None else ""

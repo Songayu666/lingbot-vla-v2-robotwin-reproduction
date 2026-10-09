@@ -1,0 +1,30 @@
+{
+  "tests": {
+    "accumulation_gradient_and_update": "passed",
+    "accumulation_count_guard": "passed",
+    "nonfinite_gradient_guard": "passed",
+    "phase_loss_6_tests": "passed",
+    "cuda_oom_retry_simulation": "passed",
+    "non_oom_no_retry": "passed",
+    "repeated_oom_stops": "passed"
+  },
+  "screen_episodes": 36,
+  "additional_episodes": 84,
+  "baseline_preserved": true,
+  "real_gpu_training_verified": true,
+  "startup_progress": {
+    "step": 6502,
+    "target_step": 6750,
+    "resumed_step": 6500,
+    "updates_this_process": 2,
+    "samples_this_process": 8,
+    "microbatches": 4,
+    "global_batch_size": 4,
+    "step_seconds": 81.15757918357849,
+    "loss": 0.10843299329280853,
+    "grad_norm": 0.8266631364822388,
+    "peak_allocated_gib": 40.60136365890503,
+    "peak_reserved_gib": 40.875,
+    "timestamp": 1791462245.260641
+  }
+}

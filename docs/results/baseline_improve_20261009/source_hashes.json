@@ -1,0 +1,9 @@
+{
+  "tasks/vla/train_lingbotvla.py": "a583c0fccdd17c901ab09bbe27c3c5e13672ab8217dd8e22c69a9e42bd08b48b",
+  "lingbotvla/optim/accumulation.py": "5300b68dee3661b688ed2b21fbca444231fed86a2dbc7d6071418263c6c711b0",
+  "02_\u4ee3\u7801\u6750\u6599/baseline_improve_pipeline.py": "507d1c800f1556a8dfd9ff89d8f3459e24918a9ebc659a19f79391bfa6195aaf",
+  "02_\u4ee3\u7801\u6750\u6599/configs/train_baseline_padonly_6750_lowmem.yaml": "b346ed5d10bbb3870f0822da6c4234620630dad0991dbbfdee07222b7b64ec1a",
+  "02_\u4ee3\u7801\u6750\u6599/configs/train_baseline_accum4_6750.yaml": "d72cdaa9bd455e72f74638bad2f7bd8a1cb6277791583b6e37697a67a117276b",
+  "02_\u4ee3\u7801\u6750\u6599/configs/train_baseline_padonly_6750.yaml": "751ec3de3fb455630acc7cce9f86c4e34c1719f802e6d1dd10cb34eca44b8887",
+  "02_\u4ee3\u7801\u6750\u6599/configs/train_baseline_accum4_6750_lowmem.yaml": "66d487c7b024a5a20351a278c60e14917981d99fed91258e2f48ac2b02c49121"
+}

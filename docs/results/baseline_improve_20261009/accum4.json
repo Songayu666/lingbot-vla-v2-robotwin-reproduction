@@ -1,0 +1,67 @@
+{
+  "tasks": [
+    {
+      "task": "adjust_bottle",
+      "successes": 0,
+      "total": 3
+    },
+    {
+      "task": "click_bell",
+      "successes": 1,
+      "total": 3
+    },
+    {
+      "task": "hanging_mug",
+      "successes": 0,
+      "total": 3
+    },
+    {
+      "task": "lift_pot",
+      "successes": 0,
+      "total": 3
+    },
+    {
+      "task": "move_playingcard_away",
+      "successes": 2,
+      "total": 3
+    },
+    {
+      "task": "open_laptop",
+      "successes": 0,
+      "total": 3
+    },
+    {
+      "task": "open_microwave",
+      "successes": 3,
+      "total": 3
+    },
+    {
+      "task": "pick_dual_bottles",
+      "successes": 0,
+      "total": 3
+    },
+    {
+      "task": "place_container_plate",
+      "successes": 0,
+      "total": 3
+    },
+    {
+      "task": "press_stapler",
+      "successes": 2,
+      "total": 3
+    },
+    {
+      "task": "shake_bottle",
+      "successes": 1,
+      "total": 3
+    },
+    {
+      "task": "turn_switch",
+      "successes": 0,
+      "total": 3
+    }
+  ],
+  "successes": 9,
+  "total": 36,
+  "hard_successes": 2
+}
