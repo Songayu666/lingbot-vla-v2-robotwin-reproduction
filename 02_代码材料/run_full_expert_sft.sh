@@ -49,12 +49,16 @@ train_model() {
 
 screen_step() {
   local step="$1"
+  # A just-stopped inference server can retain its listening port briefly.
+  # Give each checkpoint a stable, distinct port so sequential screening can
+  # continue without racing the previous server's teardown.
+  local eval_port=$((PORT + step / SAVE_STEPS - 1))
   local model="$OUT/checkpoints/global_step_${step}/hf_ckpt"
   local eval_out="$OUT/screen_step${step}"
   test -f "$model/model.safetensors.index.json"
   MODEL_PATH="$model" OUT_DIR="$eval_out" MANIFEST="$MANIFEST" TASKS="$TASKS" \
     EPISODES="${EPISODES:-3}" SAMPLING_SEED="${SAMPLING_SEED:-420006}" \
-    TEMPORAL_ENSEMBLE=False VIDEO=False GUI=0 PORT="$PORT" \
+    TEMPORAL_ENSEMBLE=False VIDEO=False GUI=0 PORT="$eval_port" \
     bash 02_代码材料/diagnostics/run.sh 10
 }
 
